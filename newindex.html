@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tracker</title>
+    <style>
+   
+    
+   body {
+  font-family: sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: url('your-image-url.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  overflow: hidden;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent container */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 90%; /* Makes container responsive */
+  max-width: 1000px; /* Container's max width, more reasonable */
+  text-align: center;
+  z-index: 1;
+}
+
+#task-list {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+  width: 100%; /* Full width of container */
+  max-width: 1000px; /* Keep task list size reasonable */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+#task-list li {
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem; /* Reduced font size for normal view */
+  color: #007bff; /* Blue color for the text */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+#task-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 15px 30px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.8); /* Lighter background on hover */
+}
+
+#task-list li.completed {
+  text-decoration: line-through;
+  color: #888; /* Completed tasks color */
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
+.uploaded-photo {
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.smile-rate {
+  font-size: 16px; /* Reduced font size */
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 90%;
+  max-width: 650px;
+  text-align: center;
+  z-index: 1;
+  animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+h1, h2 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-shadow: 3px 3px 10px rgba(0, 123, 255, 0.7), -3px -3px 10px rgba(0, 123, 255, 0.7);
+}
+
+h1 {
+  font-size: 4rem; /* Increased font size */
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  animation: bounceIn 1.5s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+h2 {
+  font-size: 2.5rem; /* Increased font size */
+  color: #28a745;
+  text-shadow: 3px 3px 10px rgba(40, 167, 69, 0.7), -3px -3px 10px rgba(40, 167, 69, 0.7);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.tab {
+  padding: 15px 30px;
+  border-radius: 10px 10px 0 0;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.3rem; /* Increased font size */
+  transition: background-color 0.3s, transform 0.2s;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tab:hover {
+  background-color: #0056b3;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  padding: 25px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+input[type="text"], button, input[type="file"] {
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.3rem; /* Increased font size */
+  transition: transform 0.2s ease;
+}
+
+input[type="text"]:focus, button:focus, input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+  transform: scale(1.02);
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem; /* Increased font size */
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0062cc;
+  transform: scale(1.05);
+}
+
+#task-list {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#task-list li {
+  padding: 20px;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.2); /* Transparent background */
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem; /* Increased font size */
+  color: #007bff; /* Blue color for the text */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+#task-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 15px 30px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.4); /* Lighter background on hover */
+}
+
+#task-list li.completed {
+  text-decoration: line-through;
+  color: #888; /* Keep the color for completed tasks as gray */
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
+.uploaded-photo {
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.smile-rate {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.smile-rate {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+.smile-rate {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#task-list li:hover {
+  background-color: #f0f0f0;
+}
+
+#task-list li.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.checkbox {
+  margin-right: 20px;
+}
+
+.uploaded-photo {
+  max-width: 100%;
+  margin: 25px 0;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.smile-rate {
+  font-size: 2rem; /* Increased font size */
+  font-weight: bold;
+  margin-top: 15px;
+  color: #ff6f61;
+  text-shadow: 3px 3px 15px rgba(255, 105, 97, 0.6);
+  letter-spacing: 2px;
+}
+
+/* Fireworks styles */
+.firework {
+  position: fixed;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+  animation: explode 1.5s ease-out forwards, sparkle 0.5s infinite alternate;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(calc(var(--x) * 50vw), calc(var(--y) * 50vh)) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(var(--x) * 70vw), calc(var(--y) * 70vh)) scale(1.5);
+  }
+  100% {
+    transform: translate(calc(var(--x) * 100vw), calc(var(--y) * 100vh)) scale(2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.emoji {
+  font-size: 3rem; /* Larger emoji size */
+  margin-right: 10px;
+  animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.smile-rate span {
+  font-size: 4rem; /* Increased smiley font size */
+  margin-left: 10px;
+  display: inline-block;
+  animation: smileyBounce 0.8s ease infinite alternate;
+}
+
+@keyframes smileyBounce {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+
+        /* Add your existing styles here */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" id="taskTab">Tasks</div>
+            <div class="tab" id="smileTab">Smile Rate</div>
+        </div>
+
+        <div id="taskContent" class="tab-content active">
+            <h1>🎯 Task Completion 🎯</h1>
+            <input type="text" id="task-input" placeholder="Enter a task..." />
+            <button id="add-task">Add Task</button>
+            <ul id="task-list"></ul>
+        </div>
+
+        <div id="smileContent" class="tab-content">
+            <h2>😊 Smile Rate</h2>
+            <input type="file" id="file-input" accept="image/*">
+            <button id="upload-photo">Get Smile Rate</button>
+            <img id="uploaded-photo" class="uploaded-photo" src="" alt="Your uploaded photo">
+            <p id="smile-rate" class="smile-rate"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskInput = document.getElementById('task-input');
+            const addTaskButton = document.getElementById('add-task');
+            const taskList = document.getElementById('task-list');
+            const taskTab = document.getElementById('taskTab');
+            const smileTab = document.getElementById('smileTab');
+            const taskContent = document.getElementById('taskContent');
+            const smileContent = document.getElementById('smileContent');
+
+            const fileInput = document.getElementById('file-input');
+            const uploadPhotoButton = document.getElementById('upload-photo');
+            const uploadedPhoto = document.getElementById('uploaded-photo');
+            const smileRateDisplay = document.getElementById('smile-rate');
+
+            // Switch tabs on click
+            taskTab.addEventListener('click', () => {
+                taskTab.classList.add('active');
+                smileTab.classList.remove('active');
+                taskContent.classList.add('active');
+                smileContent.classList.remove('active');
+            });
+
+            smileTab.addEventListener('click', () => {
+                smileTab.classList.add('active');
+                taskTab.classList.remove('active');
+                smileContent.classList.add('active');
+                taskContent.classList.remove('active');
+            });
+
+            addTaskButton.addEventListener('click', () => {
+                const task = taskInput.value.trim();
+                if (task) {
+                    const li = document.createElement('li');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('checkbox');
+                    li.appendChild(checkbox);
+                    li.appendChild(document.createTextNode(task));
+                    taskList.appendChild(li);
+                    taskInput.value = '';
+
+                    checkbox.addEventListener('change', () => {
+                        if (checkbox.checked) {
+                            li.classList.add('completed');
+                            triggerFireworks();
+                        } else {
+                            li.classList.remove('completed');
+                        }
+                    });
+                }
+            });
+
+            // Handle photo upload and display smile rate
+            uploadPhotoButton.addEventListener('click', () => {
+                const file = fileInput.files[0];
+                if (file) {
+                    uploadedPhoto.src = URL.createObjectURL(file);
+                    uploadedPhoto.style.display = 'block';
+                    
+                    // Fake smile calculation (just for demo purposes)
+                    const smileRate = calculateSmileRate(file);
+                    smileRateDisplay.textContent = `Smile Rate: ${smileRate}%`;
+                } else {
+                    alert("Please upload a photo first!");
+                }
+            });
+
+            // Fake smile calculation for demo
+            function calculateSmileRate(file) {
+                // In a real application, you would process the image here
+                // For now, we're returning a random smile rate for demonstration
+                const randomSmileRate = Math.floor(Math.random() * 100) + 1; // Generate a random percentage
+                return randomSmileRate;
+            }
+
+            // Fireworks effect (no change needed here)
+            function triggerFireworks() {
+                const colors = ['#ff6f61', '#0000FF', '#4caf50', '#000000', '#ff4081', '#673ab7'];
+
+                for (let i = 0; i < 20; i++) {
+                    const firework = document.createElement('div');
+                    firework.classList.add('firework');
+
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.background = `radial-gradient(circle, ${color}, transparent)`;
+
+                    const size = Math.random() * 20 + 10;
+                    firework.style.width = `${size}px`;
+                    firework.style.height = `${size}px`;
+
+                    firework.style.setProperty('--x', Math.random() - 0.5);
+                    firework.style.setProperty('--y', Math.random() - 0.5);
+
+                    document.body.appendChild(firework);
+
+                    firework.addEventListener('animationend', () => {
+                        firework.remove();
+                    });
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
